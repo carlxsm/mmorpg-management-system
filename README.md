@@ -15,6 +15,7 @@ Para este desafio, você irá criar um sistema de gerenciamento de personagens e
 1. **Personagem**:
     - ID (identificador único)
     - Nome
+    - Raça (Humano,Elfo,Anão)
     - Classe (Guerreiro, Mago, Arqueiro, etc.)
     - Nível
     - Experiência
