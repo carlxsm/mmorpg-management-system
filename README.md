@@ -1,8 +1,8 @@
 # Sistema de Gerenciamento de MMORPG
 
-Nos processos seletivos, é comum deparar-se com desafios que pedem a implementação de CRUDs básicos, frequentemente focando em temas como cadastro de pessoas, sistemas de bibliotecas, "Netflix" simulados ou pokedexes. Esses projetos, embora úteis para praticar conceitos fundamentais, acabam tornando-se repetitivos e, muitas vezes, pouco inspiradores.
+É comum deparar-se com desafios que pedem a implementação de CRUDs básicos, frequentemente focando em temas como cadastro de pessoas, sistemas de bibliotecas, "Netflix" simulados ou "pokedexes". Esses projetos, embora úteis para praticar conceitos fundamentais, acabam tornando-se repetitivos e, muitas vezes, pouco inspiradores.
 
-Por isso, decidi fazer algo diferente e criar um CRUD baseado em algo que realmente me apaixona: MMORPGs (Massively Multiplayer Online Role-Playing Games). Este projeto não só demonstra minhas habilidades técnicas em Spring Boot e SQL, mas também reflete minha paixão por jogos de RPG, oferecendo um sistema de gerenciamento de personagens e guildas. Com este projeto, espero não apenas mostrar minhas competências, mas também proporcionar uma visão criativa e envolvente, diferenciando-me dos desafios comuns que vemos por aí.
+Por isso, decidi fazer algo diferente e criar um CRUD baseado em algo que realmente me apaixona: MMORPGs (Massively Multiplayer Online Role-Playing Games). Este projeto não só demonstra habilidades técnicas, mas também reflete minha paixão por jogos de RPG, oferecendo um sistema de gerenciamento de personagens e guildas. Com este projeto, espero proporcionar uma visão criativa e envolvente, diferenciando dos desafios comuns que vemos por aí.
 
 ## Desafio: Sistema de Gerenciamento de MMORPG
 
