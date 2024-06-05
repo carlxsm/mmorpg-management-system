@@ -1,16 +1,29 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
-public class Character {
+@Entity
+@Table(name = "Hero")
+public class Hero {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name",nullable = false,length = 14)
     private String name;
+    @Column(name = "level",nullable = false)
     private int level;
+    @Column(name = "xp",nullable = false)
     private int xp;
+    @Column(name = "health",nullable = false)
     private int hp;
+    @Column(name = "mana",nullable = false)
     private int mp;
 
-    public Character(Long id, String name, int level, int xp, int hp, int mp) {
+    public Hero() {}
+
+    public Hero(Long id, String name, int level, int xp, int hp, int mp) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -71,7 +84,7 @@ public class Character {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Character character = (Character) o;
+        Hero character = (Hero) o;
         return level == character.level && xp == character.xp && hp == character.hp && mp == character.mp && Objects.equals(id, character.id) && Objects.equals(name, character.name);
     }
 
