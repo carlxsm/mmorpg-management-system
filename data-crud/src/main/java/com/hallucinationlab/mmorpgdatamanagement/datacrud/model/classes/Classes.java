@@ -34,16 +34,24 @@ public class Classes {
         this.name = name;
     }
 
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Classes classes = (Classes) o;
-        return Objects.equals(id, classes.id) && Objects.equals(name, classes.name);
+        return Objects.equals(id, classes.id) && Objects.equals(name, classes.name) && Objects.equals(hero, classes.hero);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, hero);
     }
 }

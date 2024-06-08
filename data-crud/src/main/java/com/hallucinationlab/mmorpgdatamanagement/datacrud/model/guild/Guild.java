@@ -1,7 +1,6 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.guild;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.Item.Item;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
 import jakarta.persistence.*;
 
@@ -61,5 +60,34 @@ public class Guild {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Hero getLeader() {
+        return leader;
+    }
+
+    public void setLeader(Hero leader) {
+        this.leader = leader;
+    }
+
+    public Set<Hero> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Hero> members) {
+        this.members = members;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Guild guild = (Guild) o;
+        return Objects.equals(id, guild.id) && Objects.equals(name, guild.name) && Objects.equals(description, guild.description) && Objects.equals(creationDate, guild.creationDate) && Objects.equals(leader, guild.leader) && Objects.equals(members, guild.members);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, creationDate, leader, members);
     }
 }

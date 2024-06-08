@@ -7,7 +7,6 @@ import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.race.Race;
 import jakarta.persistence.*;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_hero")
@@ -89,16 +88,56 @@ public class Hero {
         this.mp = mp;
     }
 
+    public Bag getBag() {
+        return bag;
+    }
+
+    public void setBag(Bag bag) {
+        this.bag = bag;
+    }
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public Guild getGuild() {
+        return guild;
+    }
+
+    public void setGuild(Guild guild) {
+        this.guild = guild;
+    }
+
+    public Guild getGuildMember() {
+        return guildMember;
+    }
+
+    public void setGuildMember(Guild guildMember) {
+        this.guildMember = guildMember;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hero character = (Hero) o;
-        return level == character.level && xp == character.xp && hp == character.hp && mp == character.mp && Objects.equals(id, character.id) && Objects.equals(name, character.name);
+        Hero hero = (Hero) o;
+        return level == hero.level && xp == hero.xp && hp == hero.hp && mp == hero.mp && Objects.equals(id, hero.id) && Objects.equals(name, hero.name) && Objects.equals(bag, hero.bag) && Objects.equals(classes, hero.classes) && Objects.equals(race, hero.race) && Objects.equals(guild, hero.guild) && Objects.equals(guildMember, hero.guildMember);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, level, xp, hp, mp);
+        return Objects.hash(id, name, level, xp, hp, mp, bag, classes, race, guild, guildMember);
     }
 }

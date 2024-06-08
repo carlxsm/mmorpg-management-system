@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_bag")
@@ -52,16 +51,24 @@ public class Bag {
         this.items = items;
     }
 
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bag bag = (Bag) o;
-        return size == bag.size && Objects.equals(id, bag.id) && Objects.equals(items, bag.items);
+        return size == bag.size && Objects.equals(id, bag.id) && Objects.equals(items, bag.items) && Objects.equals(hero, bag.hero);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, size, items);
+        return Objects.hash(id, size, items, hero);
     }
 }
