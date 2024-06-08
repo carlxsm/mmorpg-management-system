@@ -8,7 +8,7 @@ Por isso, decidi fazer algo diferente e criar um CRUD baseado em algo que realme
 
 Um RPG (Role-Playing Game) é um jogo onde os jogadores assumem os papéis de personagens em um mundo fictício, desenvolvendo histórias colaborativas e enfrentando desafios variados. Nos MMORPGs (Massively Multiplayer Online Role-Playing Games), essa experiência é ampliada para um ambiente online, onde milhares de jogadores interagem simultaneamente, formando guildas, completando missões e enfrentando inimigos em um mundo vasto e dinâmico.
 
-Para este desafio, você irá criar um sistema de gerenciamento de personagens e guildas para um MMORPG. O objetivo é desenvolver um CRUD completo usando Spring Boot e SQL, permitindo a criação, leitura, atualização e exclusão de personagens, guildas e itens. O sistema deve suportar funcionalidades como associação de personagens a guildas, gerenciamento de inventários e autenticação com JWT. Adicionalmente, a implementação deve incluir documentação com Swagger e boas práticas de segurança e validação de dados.
+Para este desafio, você irá criar um sistema de gerenciamento de personagens e guildas para um MMORPG. O objetivo é desenvolver um CRUD completo usando Spring Boot e SQL, permitindo a criação, leitura, atualização e exclusão de personagens, guildas e itens. O sistema deve suportar funcionalidades como associação de personagens a guildas, gerenciamento de inventários e autenticação com JWT. Adicionalmente, a implementação deve incluir Swagger e boas práticas de segurança e validação de dados.
 
 ## Entidades principais
 
