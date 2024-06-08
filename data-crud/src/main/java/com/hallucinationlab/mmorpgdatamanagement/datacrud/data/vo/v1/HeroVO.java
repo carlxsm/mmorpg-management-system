@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @JsonPropertyOrder({"ID","Name","Level","Experience","HP","MP"})
 public class HeroVO {
@@ -83,8 +84,8 @@ public class HeroVO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HeroVO heroVO = (HeroVO) o;
-        return level == heroVO.level && xp == heroVO.xp && hp == heroVO.hp && mp == heroVO.mp && Objects.equals(id, heroVO.id) && Objects.equals(name, heroVO.name);
+        HeroVO vo = (HeroVO) o;
+        return level == vo.level && xp == vo.xp && hp == vo.hp && mp == vo.mp && Objects.equals(id, vo.id) && Objects.equals(name, vo.name);
     }
 
     @Override

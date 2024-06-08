@@ -1,15 +1,22 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.classes;
 
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_class")
 public class Classes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
 
-    public Classes(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @OneToOne
+    @JoinColumn(name = "hero_id")
+    private Hero hero;
 
     public Long getId() {
         return id;

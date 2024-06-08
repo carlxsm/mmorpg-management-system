@@ -21,19 +21,23 @@ public class CharacterController {
     public HeroVO createHero(@RequestBody HeroVO hero) {
         return service.createHero(hero);
     }
+
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public List<HeroVO> findAllHeroes(){
         return service.findAllHeroes();
     }
+
     @GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public HeroVO findHeroById(@PathVariable(value = "id") Long id){
         return service.findHeroById(id);
     }
+
     @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
                 produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public HeroVO updateHero(@RequestBody HeroVO hero){
         return service.updateHero(hero);
     }
+
     @DeleteMapping(value="/{id}")
     public ResponseEntity<?> deleteHero(@PathVariable Long id){
         service.deleteHero(id);

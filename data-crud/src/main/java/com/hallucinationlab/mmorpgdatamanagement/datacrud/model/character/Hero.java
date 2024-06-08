@@ -1,11 +1,16 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character;
 
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.bag.Bag;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.classes.Classes;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.guild.Guild;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.race.Race;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
-@Table(name = "Hero")
+@Table(name = "tb_hero")
 public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +26,20 @@ public class Hero {
     @Column(name = "mana",nullable = false)
     private int mp;
 
-    public Hero() {}
+    @OneToOne(mappedBy = "hero",cascade = CascadeType.ALL)
+    private Bag bag;
+    @OneToOne
+    private Classes classes;
+    @OneToOne
+    private Race race;
 
-    public Hero(Long id, String name, int level, int xp, int hp, int mp) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.xp = xp;
-        this.hp = hp;
-        this.mp = mp;
-    }
+    @OneToOne
+    @JoinColumn(name = "guild_id_1")
+    private Guild guild;
+
+    @ManyToOne
+    @JoinColumn(name = "guild_member_id")
+    private Guild guildMember;
 
     public Long getId() {
         return id;

@@ -1,19 +1,32 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.bag;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.Item.Item;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
+import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
+@Entity
+@Table(name = "tb_bag")
 public class Bag {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idCharacter;
-    private Long idItemList;
+    @Column
     private int size;
 
-    public Bag(Long id, Long idCharacter, Long idItemList, int size) {
-        this.id = id;
-        this.idCharacter = idCharacter;
-        this.idItemList = idItemList;
-        this.size = size;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "bag",fetch = FetchType.EAGER)
+    private Set<Item> items = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "hero_id")
+    private Hero hero;
 
     public Long getId() {
         return id;
@@ -21,22 +34,6 @@ public class Bag {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdCharacter() {
-        return idCharacter;
-    }
-
-    public void setIdCharacter(Long idCharacter) {
-        this.idCharacter = idCharacter;
-    }
-
-    public Long getIdItemList() {
-        return idItemList;
-    }
-
-    public void setIdItemList(Long idItemList) {
-        this.idItemList = idItemList;
     }
 
     public int getSize() {
@@ -47,16 +44,24 @@ public class Bag {
         this.size = size;
     }
 
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bag bag = (Bag) o;
-        return size == bag.size && Objects.equals(id, bag.id) && Objects.equals(idCharacter, bag.idCharacter) && Objects.equals(idItemList, bag.idItemList);
+        return size == bag.size && Objects.equals(id, bag.id) && Objects.equals(items, bag.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idCharacter, idItemList, size);
+        return Objects.hash(id, size, items);
     }
 }
