@@ -4,7 +4,7 @@ import com.hallucinationlab.mmorpgdatamanagement.datacrud.exceptions.ResourceNot
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.mapper.ObjectMapper;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v1.HeroVO;
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.repositories.CharacterRepository;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.repositories.HeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class HeroServices {
 
 
     @Autowired
-    CharacterRepository repository;
+    HeroRepository repository;
 
     public HeroVO createHero(HeroVO heroVO) {
         logger.info("Bip.. Bop.. Creating a Hero...");

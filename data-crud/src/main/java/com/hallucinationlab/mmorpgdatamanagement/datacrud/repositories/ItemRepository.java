@@ -1,4 +1,7 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.repositories;
 
-public interface ItemRepository {
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.Item.Item;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 }
