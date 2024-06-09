@@ -6,14 +6,21 @@ import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.guild.Guild;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.race.Race;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_hero")
-public class Hero {
+public class Hero implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     @Column(name = "name",nullable = false,length = 14)
     private String name;
     @Column(name = "level",nullable = false)
@@ -25,26 +32,28 @@ public class Hero {
     @Column(name = "mana",nullable = false)
     private int mp;
 
-    @OneToOne(mappedBy = "hero",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="bag_id")
     private Bag bag;
-    @OneToOne
-    private Classes classes;
-    @OneToOne
-    private Race race;
 
-    @OneToOne
-    @JoinColumn(name = "guild_id_1")
-    private Guild guild;
 
     @ManyToOne
-    @JoinColumn(name = "guild_member_id")
-    private Guild guildMember;
+    @JoinColumn(name = "class_id")
+    private Classes classes;
 
-    public Long getId() {
+    @ManyToOne
+    @JoinColumn(name = "race_id")
+    private Race race;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "guild_id")
+    private Guild guild;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -112,20 +121,12 @@ public class Hero {
         this.race = race;
     }
 
-    public Guild getGuild() {
+    public Guild getGuildMember() {
         return guild;
     }
 
-    public void setGuild(Guild guild) {
-        this.guild = guild;
-    }
-
-    public Guild getGuildMember() {
-        return guildMember;
-    }
-
     public void setGuildMember(Guild guildMember) {
-        this.guildMember = guildMember;
+        this.guild = guildMember;
     }
 
     @Override
@@ -133,11 +134,11 @@ public class Hero {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hero hero = (Hero) o;
-        return level == hero.level && xp == hero.xp && hp == hero.hp && mp == hero.mp && Objects.equals(id, hero.id) && Objects.equals(name, hero.name) && Objects.equals(bag, hero.bag) && Objects.equals(classes, hero.classes) && Objects.equals(race, hero.race) && Objects.equals(guild, hero.guild) && Objects.equals(guildMember, hero.guildMember);
+        return level == hero.level && xp == hero.xp && hp == hero.hp && mp == hero.mp && Objects.equals(id, hero.id) && Objects.equals(name, hero.name) && Objects.equals(bag, hero.bag) && Objects.equals(classes, hero.classes) && Objects.equals(race, hero.race) && Objects.equals(guild, hero.guild);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, level, xp, hp, mp, bag, classes, race, guild, guildMember);
+        return Objects.hash(id, name, level, xp, hp, mp, bag, classes, race, guild);
     }
 }

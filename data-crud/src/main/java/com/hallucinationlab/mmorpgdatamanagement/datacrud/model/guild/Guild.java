@@ -4,36 +4,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
 import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_guild")
-public class Guild {
+public class Guild implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private Date creationDate;
-
-    @OneToOne
-    private Hero leader;
+    private LocalDateTime creationDate =  LocalDateTime.now();
+    // @Column(nullable = false)
+    // private Hero leader
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "guildMember",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Hero> members = new HashSet<>();
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -54,22 +56,6 @@ public class Guild {
         this.description = description;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Hero getLeader() {
-        return leader;
-    }
-
-    public void setLeader(Hero leader) {
-        this.leader = leader;
-    }
-
     public Set<Hero> getMembers() {
         return members;
     }
@@ -83,11 +69,11 @@ public class Guild {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Guild guild = (Guild) o;
-        return Objects.equals(id, guild.id) && Objects.equals(name, guild.name) && Objects.equals(description, guild.description) && Objects.equals(creationDate, guild.creationDate) && Objects.equals(leader, guild.leader) && Objects.equals(members, guild.members);
+        return Objects.equals(id, guild.id) && Objects.equals(name, guild.name) && Objects.equals(description, guild.description) && Objects.equals(creationDate, guild.creationDate) && Objects.equals(members, guild.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, creationDate, leader, members);
+        return Objects.hash(id, name, description, creationDate, members);
     }
 }

@@ -2,41 +2,39 @@ package com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.classes.Classes;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.guild.Guild;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.race.Race;
 
 import java.util.Objects;
 import java.util.UUID;
 
-@JsonPropertyOrder({"ID","Name","Level","Experience","HP","MP"})
+@JsonPropertyOrder({"id","race","classe","name","level","experience","hp","mp","guild"})
 public class HeroVO {
-    @JsonProperty("ID")
-    private Long id;
-    @JsonProperty("Name")
+    @JsonProperty("id")
+    private UUID id;
+    @JsonProperty("name")
     private String name;
-    @JsonProperty("Level")
+    @JsonProperty("level")
     private int level;
-    @JsonProperty("Experience")
+    @JsonProperty("experience")
     private int xp;
-    @JsonProperty("HP")
+    @JsonProperty("hp")
     private int hp;
-    @JsonProperty("MP")
+    @JsonProperty("mp")
     private int mp;
+    @JsonProperty("guild")
+    private UUID guild;
+    @JsonProperty("race")
+    private UUID race;
+    @JsonProperty("classe")
+    private UUID classe;
 
-    public HeroVO() {}
-
-    public HeroVO(Long id, String name, int level, int xp, int hp, int mp) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.xp = xp;
-        this.hp = hp;
-        this.mp = mp;
-    }
-
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -80,16 +78,40 @@ public class HeroVO {
         this.mp = mp;
     }
 
+    public UUID getGuild() {
+        return guild;
+    }
+
+    public void setGuild(UUID guild) {
+        this.guild = guild;
+    }
+
+    public UUID getRace() {
+        return race;
+    }
+
+    public void setRace(UUID race) {
+        this.race = race;
+    }
+
+    public UUID getClasse() {
+        return classe;
+    }
+
+    public void setClasse(UUID classe) {
+        this.classe = classe;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HeroVO vo = (HeroVO) o;
-        return level == vo.level && xp == vo.xp && hp == vo.hp && mp == vo.mp && Objects.equals(id, vo.id) && Objects.equals(name, vo.name);
+        return level == vo.level && xp == vo.xp && hp == vo.hp && mp == vo.mp && Objects.equals(id, vo.id) && Objects.equals(name, vo.name) && Objects.equals(guild, vo.guild) && Objects.equals(race, vo.race) && Objects.equals(classe, vo.classe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, level, xp, hp, mp);
+        return Objects.hash(id, name, level, xp, hp, mp, guild, race, classe);
     }
 }

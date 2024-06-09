@@ -23,10 +23,6 @@ public class Bag {
     @OneToMany(mappedBy = "bag",fetch = FetchType.EAGER)
     private Set<Item> items = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "hero_id")
-    private Hero hero;
-
     public Long getId() {
         return id;
     }
@@ -51,24 +47,16 @@ public class Bag {
         this.items = items;
     }
 
-    public Hero getHero() {
-        return hero;
-    }
-
-    public void setHero(Hero hero) {
-        this.hero = hero;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bag bag = (Bag) o;
-        return size == bag.size && Objects.equals(id, bag.id) && Objects.equals(items, bag.items) && Objects.equals(hero, bag.hero);
+        return size == bag.size && Objects.equals(id, bag.id) && Objects.equals(items, bag.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, size, items, hero);
+        return Objects.hash(id, size, items);
     }
 }

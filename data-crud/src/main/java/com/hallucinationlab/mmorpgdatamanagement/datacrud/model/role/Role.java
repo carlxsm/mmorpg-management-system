@@ -1,6 +1,8 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.role;
 
+import java.util.UUID;
+
 public class Role {
-    private Long id;
+    private UUID id;
     private String name;
 }

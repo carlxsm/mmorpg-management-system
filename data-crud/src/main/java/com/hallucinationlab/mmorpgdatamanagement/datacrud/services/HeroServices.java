@@ -1,14 +1,19 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.services;
 
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v2.HeroVO2;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.exceptions.ResourceNotFoundException;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.mapper.ObjectMapper;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v1.HeroVO;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.repositories.ClassesRepository;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.repositories.HeroRepository;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.repositories.RaceRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -18,16 +23,35 @@ public class HeroServices {
 
     @Autowired
     HeroRepository repository;
+    @Autowired
+    RaceRepository raceRepository;
+    @Autowired
+    ClassesRepository classesRepository;
 
-    public HeroVO createHero(HeroVO heroVO) {
+    @Transactional
+    public HeroVO2 createHero(HeroVO heroVO) {
         logger.info("Bip.. Bop.. Creating a Hero...");
-        var entity = ObjectMapper.parseObject(heroVO,Hero.class);
-        return ObjectMapper.parseObject(repository.save(entity),HeroVO.class);
+        Hero entity = new Hero();
+
+        entity.setName(heroVO.getName());
+        entity.setLevel(heroVO.getLevel());
+        entity.setXp(heroVO.getXp());
+        entity.setHp(heroVO.getHp());
+        entity.setMp(heroVO.getMp());
+        entity.setClasses(classesRepository.findById(heroVO.getClasse()).orElseThrow());
+        entity.setRace(raceRepository.findById(heroVO.getRace()).orElseThrow());
+
+        var savedHero = ObjectMapper.parseObject(repository.save(entity), HeroVO2.class) ;
+        savedHero.setRace(raceRepository.findRaceNameById(heroVO.getRace()));
+        savedHero.setClasse(classesRepository.findClassesNameById(heroVO.getClasse()));
+        logger.info("class : " +savedHero.getClasse());
+        logger.info("race : "+savedHero.getRace());
+        return savedHero;
     }
 
-    public HeroVO findHeroById(Long id) {
+    public HeroVO findHeroById(UUID id) {
         logger.info("Bip.. Bop.. We're loking a Hero...");
-        var entity = repository.findById(id).orElseThrow(()->new ResourceNotFoundException("No hero found with id: " + id)); ;
+        var entity = repository.findById(id).orElseThrow(()->new ResourceNotFoundException("No hero found with id: " + id));
         return ObjectMapper.parseObject(entity,HeroVO.class);
     }
 
@@ -37,6 +61,7 @@ public class HeroServices {
         return ObjectMapper.parseListObject(repository.findAll(),HeroVO.class);
     }
 
+    @Transactional
     public HeroVO updateHero(HeroVO heroVO) {
         logger.info("Bip.. Bop.. Updating Hero...");
         var entity = repository.findById(heroVO.getId()).orElseThrow(()->new ResourceNotFoundException("No hero found with id: " + heroVO.getId()));
@@ -46,11 +71,14 @@ public class HeroServices {
         entity.setXp(heroVO.getXp());
         entity.setHp(heroVO.getHp());
         entity.setMp(heroVO.getMp());
+        entity.setClasses(classesRepository.findById(heroVO.getClasse()).orElseThrow());
+        entity.setRace(raceRepository.findById(heroVO.getRace()).orElseThrow());
         logger.info("Bip.. Bop.. Hero updated!");
         return ObjectMapper.parseObject(repository.save(entity),HeroVO.class);
     }
 
-    public void deleteHero(Long id) {
+    @Transactional
+    public void deleteHero(UUID id) {
         logger.info("Bip.. Bop.. Deleting Hero...");
         var entity = repository.findById(id).orElseThrow(()->new RuntimeException("kkk"));
         repository.delete(entity);

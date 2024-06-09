@@ -3,14 +3,20 @@ package com.hallucinationlab.mmorpgdatamanagement.datacrud.model.Item;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.bag.Bag;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_item")
-public class Item {
+public class Item implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -22,11 +28,11 @@ public class Item {
     @JoinColumn(name = "bag_id")
     private Bag bag;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
