@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @JsonPropertyOrder({"Id","Name","Description","Members"})
-public class GuildVO {
+public class GuildDTO {
     @JsonProperty("Id")
     private UUID id;
     @JsonProperty("Name")
@@ -53,8 +53,8 @@ public class GuildVO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GuildVO guildVO = (GuildVO) o;
-        return members == guildVO.members && Objects.equals(id, guildVO.id) && Objects.equals(name, guildVO.name) && Objects.equals(description, guildVO.description);
+        GuildDTO guildDTO = (GuildDTO) o;
+        return members == guildDTO.members && Objects.equals(id, guildDTO.id) && Objects.equals(name, guildDTO.name) && Objects.equals(description, guildDTO.description);
     }
 
     @Override

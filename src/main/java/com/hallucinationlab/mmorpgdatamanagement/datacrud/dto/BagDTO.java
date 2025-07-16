@@ -1,15 +1,19 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class ClassesVO {
+@JsonPropertyOrder({"Id","Size","Available"})
+public class BagDTO {
     @JsonProperty("Id")
     private UUID id;
-    @JsonProperty("Nome")
-    private String nome;
+    @JsonProperty("Size")
+    private Long size;
+    @JsonProperty("Available")
+    private Long available;
 
     public UUID getId() {
         return id;
@@ -19,24 +23,24 @@ public class ClassesVO {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Long getSize() {
+        return size;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClassesVO classesVO = (ClassesVO) o;
-        return id == classesVO.id && Objects.equals(nome, classesVO.nome);
+        BagDTO bagDTO = (BagDTO) o;
+        return id == bagDTO.id && size == bagDTO.size;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome);
+        return Objects.hash(id, size);
     }
 }

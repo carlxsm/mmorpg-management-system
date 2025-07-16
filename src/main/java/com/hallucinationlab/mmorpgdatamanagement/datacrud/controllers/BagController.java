@@ -1,19 +1,19 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.controllers;
 
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.BagVO;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.BagDTO;
 
 public class BagController {
 
-    public BagVO getBag(){
+    public BagDTO getBag(){
         return null;
     }
-    public BagVO createBag(){
+    public BagDTO createBag(){
         return null;
     }
-    public BagVO updateBag(){
+    public BagDTO updateBag(){
         return null;
     }
-    public BagVO deleteBag(){
+    public BagDTO deleteBag(){
         return null;
     }
 }

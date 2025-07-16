@@ -1,6 +1,6 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.services;
 
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v2.HeroVO2;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.request.CharacterCreateRequest;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.exceptions.ResourceNotFoundException;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.mapper.ObjectMapper;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.domain.entity.Character;
@@ -21,30 +21,13 @@ public class CharacterService {
 
     @Autowired
     CharacterRepository repository;
-    @Autowired
-    RaceRepository raceRepository;
-    @Autowired
-    ClassesRepository classesRepository;
 
     @Transactional
-    public HeroVO2 createHero(CharacterDTO characterDTO) {
+    public CharacterCreateRequest createHero(CharacterCreateRequest characterDTO) {
         logger.info("Bip.. Bop.. Creating a Hero...");
         Character entity = new Character();
 
-        entity.setName(characterDTO.getName());
-        entity.setLevel(characterDTO.getLevel());
-        entity.setXp(characterDTO.getXp());
-        entity.setHp(characterDTO.getHp());
-        entity.setMp(characterDTO.getMp());
-        entity.setClasses(classesRepository.findById(characterDTO.getClasse()).orElseThrow());
-        entity.setRace(raceRepository.findById(characterDTO.getRace()).orElseThrow());
-
-        var savedHero = ObjectMapper.parseObject(repository.save(entity), HeroVO2.class) ;
-        savedHero.setRace(raceRepository.findRaceNameById(characterDTO.getRace()));
-        savedHero.setClasse(classesRepository.findClassesNameById(characterDTO.getClasse()));
-        logger.info("class : " +savedHero.getClasse());
-        logger.info("race : "+savedHero.getRace());
-        return savedHero;
+        return null;
     }
 
     public CharacterDTO findHeroById(UUID id) {
@@ -69,8 +52,6 @@ public class CharacterService {
         entity.setXp(characterDTO.getXp());
         entity.setHp(characterDTO.getHp());
         entity.setMp(characterDTO.getMp());
-        entity.setClasses(classesRepository.findById(characterDTO.getClasse()).orElseThrow());
-        entity.setRace(raceRepository.findById(characterDTO.getRace()).orElseThrow());
         logger.info("Bip.. Bop.. Hero updated!");
         return ObjectMapper.parseObject(repository.save(entity), CharacterDTO.class);
     }

@@ -1,6 +1,7 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.controllers;
 
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.CharacterDTO;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.request.CharacterCreateRequest;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.services.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,8 +20,8 @@ public class CharacterController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public CharacterDTO createHero(@RequestBody CharacterDTO hero) {
-        return service.createHero(hero);
+    public CharacterCreateRequest createRequest(@RequestBody CharacterCreateRequest characterCreateRequest) {
+        return service.createHero(characterCreateRequest);
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
