@@ -1,8 +1,8 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.mapper;
 
 
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v1.HeroVO;
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.model.character.Hero;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.CharacterDTO;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.domain.entity.Character;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -18,11 +18,11 @@ public class ObjectMapper {
         return modelMapper.map(origin,destination);
     }
 
-    public static List<HeroVO> parseListObject(List<Hero> all, Class<HeroVO> heroVOClass) {
-        List<HeroVO> heroVOList = new ArrayList<>();
-        for (Hero hero : all) {
-            heroVOList.add(parseObject(hero,HeroVO.class));
+    public static List<CharacterDTO> parseListObject(List<Character> all, Class<CharacterDTO> heroVOClass) {
+        List<CharacterDTO> characterDTOList = new ArrayList<>();
+        for (Character character : all) {
+            characterDTOList.add(parseObject(character, CharacterDTO.class));
         }
-        return heroVOList;
+        return characterDTOList;
     }
 }

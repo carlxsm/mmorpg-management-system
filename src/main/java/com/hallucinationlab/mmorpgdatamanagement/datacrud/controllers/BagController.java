@@ -1,6 +1,6 @@
 package com.hallucinationlab.mmorpgdatamanagement.datacrud.controllers;
 
-import com.hallucinationlab.mmorpgdatamanagement.datacrud.data.vo.v1.BagVO;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.dto.BagVO;
 
 public class BagController {
 
