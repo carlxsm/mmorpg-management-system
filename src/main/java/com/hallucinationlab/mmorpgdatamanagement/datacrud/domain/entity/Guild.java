@@ -23,12 +23,10 @@ public class Guild implements Serializable {
     private String description;
     @Column(nullable = false)
     private LocalDateTime creationDate =  LocalDateTime.now();
-    // @Column(nullable = false)
-    // private Hero leader
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<Character> members = new HashSet<>();
+    private List<Character> members = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -53,14 +51,6 @@ public class Guild implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<Character> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Set<Character> members) {
-        this.members = members;
     }
 
     @Override
