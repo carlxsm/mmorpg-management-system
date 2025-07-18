@@ -24,9 +24,22 @@ public class Guild implements Serializable {
     @Column(nullable = false)
     private LocalDateTime creationDate =  LocalDateTime.now();
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Character> members = new ArrayList<>();
+
+    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<GuildMembership> members = new ArrayList<>();
+
+    public void addMember(GuildMembership member) {
+        members.add(member);
+    }
+    public void removeMember(GuildMembership member) {
+        members.remove(member);
+        member.setCharacter(null);
+        member.setGuild(null);
+    }
+
+
+
+
 
     public UUID getId() {
         return id;
@@ -35,7 +48,6 @@ public class Guild implements Serializable {
     public void setId(UUID id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -52,6 +64,7 @@ public class Guild implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     @Override
     public boolean equals(Object o) {

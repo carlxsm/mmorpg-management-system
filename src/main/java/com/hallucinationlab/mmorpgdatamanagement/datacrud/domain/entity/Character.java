@@ -2,10 +2,13 @@ package com.hallucinationlab.mmorpgdatamanagement.datacrud.domain.entity;
 
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.domain.enums.CharacterClass;
 import com.hallucinationlab.mmorpgdatamanagement.datacrud.domain.enums.CharacterRace;
+import com.hallucinationlab.mmorpgdatamanagement.datacrud.domain.enums.GuildRole;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,11 +30,24 @@ public class Character implements Serializable {
     @JoinColumn(name = "account_id")
     private UserAccount userAccount;
 
-    @ManyToOne
-    @JoinColumn(name = "guild_id")
-    private Guild guild;
+    @OneToMany(mappedBy = "character",cascade =  CascadeType.ALL, orphanRemoval = true)
+    private List<GuildMembership> guildMembership = new ArrayList<>();
 
+    public void joinGuild(Guild guild, GuildRole guildRole) {
+        this.guildMembership.clear();
+        GuildMembership guildMembership = new GuildMembership(this, guild, guildRole);
+        this.guildMembership.add(guildMembership);
+        guild.addMember(guildMembership);
+    }
 
+    public void leaveGuild(){
+        if(!this.guildMembership.isEmpty()){
+            GuildMembership member = this.guildMembership.get(0);
+            member.getGuild().removeMember(member);
+            this.guildMembership.clear();
+
+        }
+    }
 
 
 }
